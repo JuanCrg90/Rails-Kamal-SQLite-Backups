@@ -2,6 +2,8 @@
 
 Reusable SQLite backup scripts for Rails 8 apps deployed with Kamal.
 
+Related write-up: [Backing up SQLite for Rails apps with Kamal](https://juancrg90.me/posts/backing-up-sqlite-rails-kamal/).
+
 Backups are stored inside each app workspace:
 
 ```text
