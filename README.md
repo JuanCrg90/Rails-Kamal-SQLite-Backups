@@ -61,6 +61,42 @@ $LOCAL_BACKUP_ROOT/$APP_NAME/<timestamp>/
 
 Cleanup removes timestamped backup directories older than `RETENTION_DAYS`.
 
+## Restore
+
+Preview a restore first:
+
+```bash
+./restore.sh config/projects/my-app.env --dry-run
+```
+
+Run the restore:
+
+```bash
+./restore.sh config/projects/my-app.env
+```
+
+Restore lists local backup versions from newest to oldest under:
+
+```text
+$LOCAL_BACKUP_ROOT/$APP_NAME/
+```
+
+After selecting a version, the script uploads all files from that timestamped
+backup directory to:
+
+```text
+$SERVER_USER@$SERVER_HOST:$REMOTE_BACKUP_DIR/
+```
+
+For safety, restore asks whether to create a remote `pre_restore_<timestamp>`
+copy of current SQLite files before upload, then requires typing:
+
+```text
+RESTORE <app-name>
+```
+
+The script does not restart the app.
+
 ## Cron
 
 ```cron

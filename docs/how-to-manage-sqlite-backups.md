@@ -85,6 +85,43 @@ $LOCAL_BACKUP_ROOT/$APP_NAME
 
 It keeps the latest 7 days by default through `RETENTION_DAYS=7`.
 
+## Restore
+
+Preview the upload without changing the server:
+
+```bash
+./restore.sh config/projects/my-app.env --dry-run
+```
+
+Run the restore:
+
+```bash
+./restore.sh config/projects/my-app.env
+```
+
+The script lists timestamped backup directories from newest to oldest under:
+
+```text
+$LOCAL_BACKUP_ROOT/$APP_NAME
+```
+
+Pick the backup version to restore. The script uploads all files from that
+timestamped directory to:
+
+```text
+$SERVER_USER@$SERVER_HOST:$REMOTE_BACKUP_DIR/
+```
+
+Before upload, the script can create a remote safety copy of existing SQLite
+files at:
+
+```text
+$REMOTE_BACKUP_DIR/pre_restore_<timestamp>/
+```
+
+Restore requires typing `RESTORE <app-name>` before any upload. It does not
+restart the app; restart manually after the files are in place.
+
 ## Cron
 
 Example daily schedule:

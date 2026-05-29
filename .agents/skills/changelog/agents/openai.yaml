@@ -1,0 +1,4 @@
+interface:
+  display_name: "Changelog"
+  short_description: "Generate CHANGELOG.md from recent changes"
+  default_prompt: "Generate or update CHANGELOG.md with the latest repository changes."
